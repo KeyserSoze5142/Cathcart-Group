@@ -15,9 +15,9 @@ A complete, modern rebuild of [cathcartgroup.com](https://www.cathcartgroup.com/
 ## Deploy a preview on GitHub Pages (2 minutes)
 
 1. Create a new repository on GitHub (e.g. `cathcart-website`).
-2. Upload the **contents** of this folder to the repository root (drag-and-drop on github.com works: *Add file → Upload files*). `index.html` must sit at the repo root.
+2. Upload **every file** in this folder to the repository root: *Add file → Upload files*, then select ALL files and drop them in. Every file is flat (no subfolders), so nothing can get lost in upload. `index.html` must end up at the repo root.
 3. In the repo: **Settings → Pages → Source: "Deploy from a branch" → Branch: `main` / root → Save**.
-4. Your preview goes live at `https://<your-username>.github.io/<repo-name>/` within a minute or two.
+4. Your preview goes live at `https://<your-username>.github.io/<repo-name>/` within a minute or two. After it deploys, hard-refresh (Ctrl/Cmd+Shift+R) to bypass any cached unstyled version.
 
 All internal links are relative, so the site works at any URL — GitHub Pages, Netlify, Vercel, or the production domain.
 
@@ -28,7 +28,7 @@ Every image and the homepage hero video load **directly from the live cathcartgr
 Before going to production (or to make the repo self-contained), run once from the repo root on your machine:
 
 ```bash
-bash tools/localize-assets.sh
+bash localize-assets.sh
 ```
 
 This downloads all 124 assets into `assets/` and rewrites the HTML to use the local copies. (This couldn't be done automatically in the sandbox this site was built in — outbound downloads from cathcartgroup.com were blocked.)
@@ -51,15 +51,14 @@ Netlify Forms or any custom endpoint work the same way.
 ## Structure
 
 ```
-├── index.html …………… homepage (+ 27 more pages at root)
-├── css/styles.css …… entire design system
-├── js/main.js ………… nav, scroll reveals, counters, form UX
+├── index.html …………… homepage (+ 27 more pages)
+├── styles.css ………… entire design system
+├── main.js ……………… nav, scroll reveals, counters, form UX
 ├── sitemap.xml / robots.txt / llms.txt
-├── 404.html
-├── .nojekyll
-└── tools/
-    ├── assets-manifest.txt …… every remote asset URL
-    └── localize-assets.sh …… download assets + rewrite HTML
+├── 404.html / .nojekyll
+├── assets-manifest.txt …… every remote asset URL
+└── localize-assets.sh …… download assets + rewrite HTML (run once, locally)
 ```
+All files intentionally live at the root — no subfolders — so uploads via the GitHub web interface can never drop them.
 
-To change brand colors, edit the CSS variables at the top of `css/styles.css`.
+To change brand colors, edit the CSS variables at the top of `styles.css`.

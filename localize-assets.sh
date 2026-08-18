@@ -7,7 +7,7 @@
 # Run this ONCE from the repository root, on your own machine
 # (requires: bash, curl, sed):
 #
-#     bash tools/localize-assets.sh
+#     bash localize-assets.sh
 #
 # Why this exists: the site currently references images/videos directly from
 # the live cathcartgroup.com server so the preview works immediately. Before
@@ -15,9 +15,9 @@
 # this script so the new site owns its own copies of every asset.
 # ============================================================================
 set -euo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")"
 
-MANIFEST="tools/assets-manifest.txt"
+MANIFEST="assets-manifest.txt"
 PREFIX="https://www.cathcartgroup.com/wp-content/uploads/"
 DEST="assets"
 
